@@ -31,7 +31,7 @@ predictive model).
 
 ### 1. Contract type is by far the biggest churn driver
 
-![Churn rate by contract type](charts/01_churn_by_contract.png)
+![Churn rate by contract type](01_churn_by_contract.png)
 
 Month-to-month customers churn at **42.7%**, compared to **11.3%** for one-year contracts and
 just **2.8%** for two-year contracts. This is one of the clearest, most actionable patterns in
@@ -39,7 +39,7 @@ the data — contract length alone explains a massive amount of churn risk.
 
 ### 2. Fiber optic customers without tech support churn the most
 
-![Churn by internet service and tech support](charts/02_churn_by_internet_support.png)
+![Churn by internet service and tech support](02_churn_by_internet_support.png)
 
 Customers on fiber optic internet churn noticeably more than DSL customers, and having tech
 support consistently lowers churn within each internet service type. This combination —
@@ -48,7 +48,7 @@ investigating further (possibly pricing, reliability issues, or expectations mis
 
 ### 3. Churn risk drops sharply as tenure increases
 
-![Churn rate by tenure](charts/03_churn_by_tenure.png)
+![Churn rate by tenure](03_churn_by_tenure.png)
 
 New customers churn far more than long-tenured ones, confirming that the first year is the
 highest-risk window for this business.
@@ -63,7 +63,7 @@ without being unrealistically perfect (see `model_results.txt` for full precisio
 detail; the model is notably better at catching customers who stay than customers who leave,
 which is a real limitation worth being upfront about rather than glossing over).
 
-![Feature importance](charts/05_feature_importance.png)
+![Feature importance](05_feature_importance.png)
 
 The single strongest risk factor the model found was **Fiber optic internet service** — even
 ahead of monthly charges. Longer contracts and longer tenure were the strongest factors
@@ -99,7 +99,6 @@ customer-churn-analysis/
 ├── analysis.py
 ├── model_results.txt
 ├── top_20_at_risk_customers.csv
-└── charts/
     ├── 01_churn_by_contract.png
     ├── 02_churn_by_internet_support.png
     ├── 03_churn_by_tenure.png
