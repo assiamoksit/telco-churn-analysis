@@ -5,19 +5,19 @@ turn that prediction into an actual "call these customers this week" list.
 
 ## The Business Question
 
-A subscription business loses customers every month — that's normal. The real question is:
+A subscription business loses customers every month, that's normal. The real question is:
 **can we tell, in advance, who's likely to leave, and is there a pattern we can act on before
 they do?**
 
 ## Data
 
 [IBM Telco Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
-— 7,043 real customer records from a telecom provider, covering contract type, tenure,
+ 7,043 real customer records from a telecom provider, covering contract type, tenure,
 monthly/total charges, internet service, tech support, payment method, and whether the
 customer churned. Overall churn rate: **26.5%**.
 
 **Data cleaning:** `TotalCharges` was stored as text instead of numbers in the raw file. On
-investigation, 11 rows had a blank value instead of "0" — all of them customers with 0 months
+investigation, 11 rows had a blank value instead of "0", all of them customers with 0 months
 of tenure, meaning they were brand new and hadn't been billed yet. These aren't errors; they
 were converted to numeric and filled with 0 rather than dropped, since dropping them would have
 removed real, valid new customers from the analysis.
@@ -35,15 +35,15 @@ predictive model).
 
 Month-to-month customers churn at **42.7%**, compared to **11.3%** for one-year contracts and
 just **2.8%** for two-year contracts. This is one of the clearest, most actionable patterns in
-the data — contract length alone explains a massive amount of churn risk.
+the data, contract length alone explains a massive amount of churn risk.
 
 ### 2. Fiber optic customers without tech support churn the most
 
 ![Churn by internet service and tech support](02_churn_by_internet_support.png)
 
 Customers on fiber optic internet churn noticeably more than DSL customers, and having tech
-support consistently lowers churn within each internet service type. This combination —
-premium service without adequate support — appears to be a specific risk segment worth
+support consistently lowers churn within each internet service type. This combination,
+premium service without adequate support, appears to be a specific risk segment worth
 investigating further (possibly pricing, reliability issues, or expectations mismatch).
 
 ### 3. Churn risk drops sharply as tenure increases
@@ -58,28 +58,27 @@ highest-risk window for this business.
 I built a logistic regression model using tenure, contract type, charges, internet service,
 tech support, payment method, and demographic flags as inputs.
 
-**Model performance:** ROC-AUC = **0.842** — a genuinely strong result for churn prediction,
+**Model performance:** ROC-AUC = **0.842**, a genuinely strong result for churn prediction,
 without being unrealistically perfect (see `model_results.txt` for full precision/recall
 detail; the model is notably better at catching customers who stay than customers who leave,
 which is a real limitation worth being upfront about rather than glossing over).
 
 ![Feature importance](05_feature_importance.png)
 
-The single strongest risk factor the model found was **Fiber optic internet service** — even
+The single strongest risk factor the model found was **Fiber optic internet service**, even
 ahead of monthly charges. Longer contracts and longer tenure were the strongest factors
 *reducing* churn risk, consistent with the EDA above.
 
 ### 5. Turning the model into something usable: a ranked at-risk list
 
-Rather than stopping at "here's a model," I used it to generate `top_20_at_risk_customers.csv`
-— a ranked list of currently active customers with the highest predicted churn probability.
+Rather than stopping at "here's a model," I used it to generate `top_20_at_risk_customers.csv`, a ranked list of currently active customers with the highest predicted churn probability.
 This is the kind of deliverable a retention team could act on directly: call these customers
 first.
 
 ## Recommendations
 
 1. **Incentivize longer contracts**, especially at signup. The churn gap between month-to-month
-   (42.7%) and two-year (2.8%) contracts is the single largest lever available — a modest
+   (42.7%) and two-year (2.8%) contracts is the single largest lever available, a modest
    discount for longer commitment would likely more than pay for itself in reduced churn.
 2. **Investigate the fiber optic + no-tech-support segment specifically.** Since this
    combination churns at an especially high rate, it's worth understanding whether this is a
