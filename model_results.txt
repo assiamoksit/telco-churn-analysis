@@ -1,0 +1,30 @@
+Data cleaning note: 11 blank TotalCharges values found and set to 0 (new customers with 0 months tenure, not billed yet)
+
+ROC-AUC: 0.842
+
+              precision    recall  f1-score   support
+
+           0       0.84      0.89      0.86      1294
+           1       0.64      0.52      0.57       467
+
+    accuracy                           0.79      1761
+   macro avg       0.74      0.71      0.72      1761
+weighted avg       0.78      0.79      0.79      1761
+
+
+Feature coefficients:
+                              feature  coefficient
+                    Contract_Two year    -1.347565
+                               tenure    -1.288531
+                    Contract_One year    -0.721579
+      TechSupport_No internet service    -0.426106
+                   InternetService_No    -0.426106
+                      TechSupport_Yes    -0.414673
+PaymentMethod_Credit card (automatic)    -0.028497
+                       MonthlyCharges     0.061629
+           PaymentMethod_Mailed check     0.069464
+                        SeniorCitizen     0.265612
+       PaymentMethod_Electronic check     0.431508
+                 PaperlessBilling_Yes     0.475399
+                         TotalCharges     0.594060
+          InternetService_Fiber optic     0.709196
